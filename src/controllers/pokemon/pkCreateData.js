@@ -4,7 +4,8 @@ module.exports = async (name, image, imageShiny, hp, attack, defense, speed, hei
     if (!name || !image || !hp || !attack || !defense || !type1) {
         throw Error("incomplete data to record");
     }
-    name = name.toLowerCase();
+    name = name.toLowerCase().trim();
+    image = image.trim();
     if (await Pokemon.findOne({ where: { name: name } })){
         throw Error("the pokemon already exists");
     }
@@ -13,6 +14,8 @@ module.exports = async (name, image, imageShiny, hp, attack, defense, speed, hei
     
     if(!imageShiny || imageShiny === ""){
         imageShiny = image;
+    }else {
+        imageShiny = imageShiny.trim()
     }
     const pokemonCreated = await Pokemon.create({ name, image, imageShiny, statId: statsPokemon.id });
 
