@@ -1,7 +1,7 @@
 const { Pokemon, Type, Stats } = require("../../db");
 
 module.exports = async (name, image, imageShiny, hp, attack, defense, speed, height, weight, type1, type2) => {
-    if (!name || !image || !hp || !attack || !defense || !type1) {
+    if (!name || !image || !hp || !attack || !defense || (!type1 && !type2)) {
         throw Error("incomplete data to record");
     }
     name = name.toLowerCase().trim();
